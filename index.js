@@ -85,11 +85,11 @@ Model.HOSPITAL = [
 
 /* === Extras codes === */
 
-Model.EXTRAS_NONE               = 'None';
-Model.EXTRAS_CORE               = 'Core';
-Model.EXTRAS_CORE_PLUS          = 'CorePlus';
-Model.EXTRAS_TOP                = 'Top';
-Model.EXTRAS_WELLBEING          = 'Wellbeing';
+Model.EXTRAS_NONE                 = 'None';
+Model.EXTRAS_CORE                 = 'Core';
+Model.EXTRAS_CORE_PLUS            = 'CorePlus';
+Model.EXTRAS_TOP                  = 'Top';
+Model.EXTRAS_WELLBEING            = 'Wellbeing';
 
 Model.EXTRAS = [
   Model.EXTRAS_NONE,
@@ -224,18 +224,7 @@ Model.prototype.setHospitalProductCode = function(code) {
  * @returns {Model}
  */
 Model.prototype.isExtrasProductSelected = function() {
-  switch(this.getExtrasProductCode()) {
-
-    case Model.EXTRAS_CORE:
-    case Model.EXTRAS_CORE_PLUS:
-    case Model.EXTRAS_TOP:
-    case Model.EXTRAS_WELLBEING:
-      return true;
-
-    default:
-      return false;
-
-  }
+  return this.get('ProductSelection.Extras') !== Model.EXTRAS_NONE;
 };
 
 /**
