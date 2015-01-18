@@ -90,6 +90,7 @@ Model.EXTRAS_CORE                 = 'Core';
 Model.EXTRAS_CORE_PLUS            = 'CorePlus';
 Model.EXTRAS_TOP                  = 'Top';
 Model.EXTRAS_WELLBEING            = 'Wellbeing';
+Model.EXTRAS_BUNDLED              = 'Bundles';
 
 Model.EXTRAS = [
   Model.EXTRAS_NONE,
@@ -224,7 +225,8 @@ Model.prototype.setHospitalProductCode = function(code) {
  * @returns {Model}
  */
 Model.prototype.isExtrasProductSelected = function() {
-  return this.get('ProductSelection.Extras') !== Model.EXTRAS_NONE;
+  console.log('Extras Code: ',this.get('ProductSelection.Extras.Code'));
+  return this.get('ProductSelection.Extras.Code') !== Model.EXTRAS_NONE;
 };
 
 /**
@@ -252,15 +254,20 @@ Model.prototype.getExtrasProductCode = function() {
  * @returns {Model}
  */
 Model.prototype.setExtrasProductCode = function(code) {
+  var extras;
 
   //check the code is valid
   if (Model.EXTRAS.indexOf(code) === -1) {
     throw new Error('Invalid extras code "'+code+'".');
   }
 
-  var extras;
+  //set the bundle structure
   if (code === Model.EXTRAS_NONE) {
-    extras = null;
+    extras = {
+      "Code": "None",
+      "BaseBundle": null,
+      "Bundles": []
+    };
   } else {
     extras = this.preBundledExtrasProducts[code];
   }

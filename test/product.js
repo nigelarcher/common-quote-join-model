@@ -103,7 +103,7 @@ describe('Model: Product methods', function() {
 
   describe('.getExtrasProductCode()', function() {
 
-    it('should get the correct value', function() {
+    it('should be CorePlus', function() {
 
       assert.equal(null, model.getExtrasProductCode());
       model.set('ProductSelection.Extras', {
@@ -115,6 +115,18 @@ describe('Model: Product methods', function() {
 
     });
 
+    it('should be TOP', function() {
+
+      assert.equal(null, model.getExtrasProductCode());
+      model.set('ProductSelection.Extras', {
+        Code:         'Top',
+        BaseBundle:   'Top',
+        Bundles:      []
+      });
+      assert.equal(Model.EXTRAS_TOP, model.getExtrasProductCode());
+
+    });
+
   });
 
   describe('.setExtrasProductCode()', function() {
@@ -122,10 +134,17 @@ describe('Model: Product methods', function() {
     it('should set the mapped property for valid values', function() {
 
       model.setExtrasProductCode(Model.EXTRAS_NONE);
-      assert.equal(null, model.get('ProductSelection.Extras'));
+      assert.deepEqual({
+        "Code": "None",
+        "BaseBundle": null,
+        "Bundles": []
+      }, model.get('ProductSelection.Extras'));
 
       model.setExtrasProductCode(Model.EXTRAS_CORE);
       assert.deepEqual(preBundledExtrasProducts[Model.EXTRAS_CORE], model.get('ProductSelection.Extras'));
+
+      model.setExtrasProductCode(Model.EXTRAS_TOP);
+      assert.deepEqual(preBundledExtrasProducts[Model.EXTRAS_TOP], model.get('ProductSelection.Extras'));
 
     });
 
