@@ -225,7 +225,6 @@ Model.prototype.setHospitalProductCode = function(code) {
  * @returns {Model}
  */
 Model.prototype.isExtrasProductSelected = function() {
-  console.log('Extras Code: ',this.get('ProductSelection.Extras.Code'));
   return this.get('ProductSelection.Extras.Code') !== Model.EXTRAS_NONE;
 };
 
