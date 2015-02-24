@@ -47,6 +47,7 @@ observable(Model.prototype);
  */
 Model.PROPERTIES_THAT_COULD_AFFECT_PRICE = {
   'PersonalDetails.PolicyHolder.DateOfBirth':                                       true,
+  'ContactDetails.Address':                                                         true,
   'ContactDetails.Address.State':                                                   true,
   'GovernmentDetails.PolicyHolderPreviousFundDetails.PreviouslyHadHealthInsurance': true,
   'GovernmentDetails.ApplyGovernmentRebate':                                        true,
