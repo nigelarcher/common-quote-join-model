@@ -27,6 +27,7 @@ function Model(options) {
 
   //update the gender when the title changes
   this.on('change:PersonalDetails.PolicyHolder.Title', this.defaultPolicyHolderGender);
+  this.on('change:PersonalDetails.Partner.Title', this.defaultPartnerHolderGender);
 
   //emit generic events to listen for data that may be mapped to multiple values
   this
@@ -174,6 +175,17 @@ Model.prototype.defaultPolicyHolderGender = function() {
   var newTitle  = this.get('PersonalDetails.PolicyHolder.Title');
   var oldGender = this.get('PersonalDetails.PolicyHolder.Gender');
   this.set('PersonalDetails.PolicyHolder.Gender', Model.getGenderFromTitle(newTitle) || oldGender);
+  return this;
+};
+
+/**
+ * Default the partner's gender from the title
+ * @returns {Model}
+ */
+Model.prototype.defaultPartnerHolderGender = function() {
+  var newTitle  = this.get('PersonalDetails.Partner.Title');
+  var oldGender = this.get('PersonalDetails.Partner.Gender');
+  this.set('PersonalDetails.Partner.Gender', Model.getGenderFromTitle(newTitle) || oldGender);
   return this;
 };
 

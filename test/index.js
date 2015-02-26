@@ -134,6 +134,35 @@ describe('model', function() {
 
   });
 
+  describe('#change:PersonalDetails.Partner.Title', function() {
+
+    it('should change gender to male', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Partner.Title', 'Mr');
+      assert.equal('Male', model.get('PersonalDetails.Partner.Gender'));
+    });
+
+    it('should change gender to female', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Partner.Title', 'Mrs');
+      assert.equal('Female', model.get('PersonalDetails.Partner.Gender'));
+    });
+
+    it('should not change gender when gender is null', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Partner.Title', 'Dr');
+      assert.equal(null, model.get('PersonalDetails.Partner.Gender'));
+    });
+
+    it('should not change gender when gender is not null', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Partner.Gender', 'Male');
+      model.set('PersonalDetails.Partner.Title', 'Dr');
+      assert.equal('Male', model.get('PersonalDetails.Partner.Gender'));
+    });
+
+  });
+
   describe('#change', function() {
 
     it('should emit the `change` event when a property is updated', function(done) {
