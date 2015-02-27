@@ -10,6 +10,7 @@ var AGR         = require('aus-gov-rebate');
  * @param   {Object} options.agr                The AGR tier data
  * @param   {Object} options.lhc                The LHC data
  * @param   {Object} [options.attributes]       The initial model data
+ * @param   {Object} [options.preBundledExtrasProducts]
  */
 function Model(options) {
   var self  = this;
@@ -35,6 +36,7 @@ function Model(options) {
       self.emit('change:HospitalCode', value);
     })
     .on('change:ProductSelection.Extras', function(value) {
+      console.log('EXTRAS');
       self.emit('change:ExtrasCode', value);
     })
   ;
@@ -252,6 +254,7 @@ Model.prototype.getExtrasProductCode = function() {
 
   for (var key in this.preBundledExtrasProducts) {
     if (this.preBundledExtrasProducts.hasOwnProperty(key)) {
+      console.log('checking ',key)
       if (equals(extras, this.preBundledExtrasProducts[key])) {
         return key;
       }

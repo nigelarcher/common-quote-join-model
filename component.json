@@ -4,7 +4,7 @@
   "dependencies": {
     "jkroso/equals": "0.3.6",
     "moment/moment": "~2.8.0",
-    "anthonyshort/observable": "0.3.1",
+    "nib-components/observable": "~1.0.1",
     "nib-components/aus-gov-rebate": "~0.1.0"
   },
   "development": {
