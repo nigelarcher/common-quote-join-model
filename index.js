@@ -54,6 +54,7 @@ Model.PROPERTIES_THAT_COULD_AFFECT_PRICE = {
   'ContactDetails.Address':                                                         true,
   'ContactDetails.Address.State':                                                   true,
   'GovernmentDetails.PolicyHolderPreviousFundDetails.PreviouslyHadHealthInsurance': true,
+  'GovernmentDetails.PartnerPreviousFundDetails.PreviouslyHadHealthInsurance':      true,
   'GovernmentDetails.ApplyGovernmentRebate':                                        true,
   'GovernmentDetails.IncomeTier':                                                   true,
   'FinancialDetails.PaymentFrequency':                                              true
