@@ -183,6 +183,19 @@ Model.prototype.defaultPolicyHolderGender = function() {
 };
 
 /**
+ * Get the partner's age
+ * @param   {String} [unit=years]
+ * @returns {Number}
+ */
+Model.prototype.getPartnerAge = function(unit) {
+  var partner = this.get('PersonalDetails.Partner');
+  if (partner && partner.DateOfBirth) {
+    var dob = moment(partner.DateOfBirth, 'YYYY-MM-DD', true);
+    return Math.floor(moment().diff(dob, unit || 'years', true));
+  }
+};
+
+/**
  * Default the partner's gender from the title
  * @returns {Model}
  */
