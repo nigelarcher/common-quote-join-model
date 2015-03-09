@@ -54,6 +54,37 @@ describe('model', function() {
   });
 
 
+  describe('.getAGRPercentage()', function() {
+
+    it('should calculate AGR percentage based on policy holder and partner age', function() {
+      var model = new Model();
+      const incomeTier = 'Tier2';
+      model.getPolicyHolderAge = function() {
+        return 46;
+      };
+      model.getPartnerAge = function() {
+        return 47;
+      };
+
+      model.set('GovernmentDetails.IncomeTier', incomeTier);
+
+      model.AGR.getTier = function(tier) {
+        assert.equal(tier, 'Tier2');
+        return {
+          getPercentage: function(age1, age2) {
+            assert.equal(age1, 46);
+            assert.equal(age2, 47);
+            return 30;
+          }
+        };
+      };
+
+      assert.equal(model.getAGRPercentage(), 30);
+    });
+
+  });
+
+
   describe('.getPartnerAge()', function() {
 
     it('should be null when no partner', function() {

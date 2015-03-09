@@ -328,7 +328,7 @@ Model.prototype.isAGRApplied = function() {
  * @returns {Number}
  */
 Model.prototype.getAGRPercentage = function() {
-  return this.getAGRTier().getPercentage(this.getPolicyHolderAge());
+  return this.getAGRTier().getPercentage(this.getPolicyHolderAge(), this.getPartnerAge());
 };
 
 /**
