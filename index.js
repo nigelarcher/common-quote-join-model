@@ -72,6 +72,20 @@ Model.couldPropertyAffectPrice = function(property) {
   }
 };
 
+/* === Scale codes === */
+
+Model.SCALE_SINGLE                = 'Single';
+Model.SCALE_COUPLE                = 'Couple';
+Model.SCALE_FAMILY                = 'Family';
+Model.SCALE_SINGLE_PARENT_FAMILY  = 'SingleParentFamily';
+
+Model.SCALE = [
+  Model.SCALE_SINGLE,
+  Model.SCALE_COUPLE,
+  Model.SCALE_FAMILY,
+  Model.SCALE_SINGLE_PARENT_FAMILY
+];
+
 /* === Hospital codes === */
 
 Model.HOSPITAL_NONE               = 'None';
@@ -134,6 +148,46 @@ Model.getGenderFromTitle = function(value) {
   }
 
   return null;
+};
+
+/**
+ * Get the policy scale
+ * @returns {string}
+ */
+Model.prototype.getScale = function() {
+  return this.get('PersonalDetails.Scale');
+};
+
+/**
+ * Get whether the policy is for a single
+ * @returns {boolean}
+ */
+Model.prototype.isSingle = function() {
+  return this.getScale() === Model.SCALE_SINGLE;
+};
+
+/**
+ * Get whether the policy is for a couple
+ * @returns {boolean}
+ */
+Model.prototype.isCouple = function() {
+  return this.getScale() === Model.SCALE_COUPLE;
+};
+
+/**
+ * Get whether the policy is for a family
+ * @returns {boolean}
+ */
+Model.prototype.isFamily = function() {
+  return this.getScale() === Model.SCALE_FAMILY;
+};
+
+/**
+ * Get whether the policy is for a single-parent-family
+ * @returns {boolean}
+ */
+Model.prototype.isSingleParentFamily = function() {
+  return this.getScale() === Model.SCALE_SINGLE_PARENT_FAMILY;
 };
 
 /**

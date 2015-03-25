@@ -27,6 +27,105 @@ describe('model', function() {
 
   });
 
+  describe('.getScale()', function() {
+
+    it('should return null when there is no scale is set', function() {
+      var model = new Model();
+      assert.equal(model.getScale(), null);
+    });
+
+    it('should return couple when the scale is set to couple', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_COUPLE);
+      assert.equal(model.getScale(), Model.SCALE_COUPLE);
+    });
+
+  });
+
+  describe('.isSingle()', function() {
+
+    it('should return false when there is no scale is set', function() {
+      var model = new Model();
+      assert(!model.isSingle());
+    });
+
+    it('should return false when the scale is set to couple', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_COUPLE);
+      assert(!model.isSingle());
+    });
+
+    it('should return true when the scale is set to single', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_SINGLE);
+      assert(model.isSingle());
+    });
+
+  });
+
+  describe('.isCouple()', function() {
+
+    it('should return false when there is no scale is set', function() {
+      var model = new Model();
+      assert(!model.isCouple());
+    });
+
+    it('should return false when the scale is set to family', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_FAMILY);
+      assert(!model.isCouple());
+    });
+
+    it('should return true when the scale is set to couple', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_COUPLE);
+      assert(model.isCouple());
+    });
+
+  });
+
+  describe('.isFamily()', function() {
+
+    it('should return false when there is no scale is set', function() {
+      var model = new Model();
+      assert(!model.isFamily());
+    });
+
+    it('should return false when the scale is set to couple', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_COUPLE);
+      assert(!model.isFamily());
+    });
+
+    it('should return true when the scale is set to family', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_FAMILY);
+      assert(model.isFamily());
+    });
+
+  });
+
+  describe('.isSingleParentFamily()', function() {
+
+    it('should return false when there is no scale is set', function() {
+      var model = new Model();
+      assert(!model.isSingleParentFamily());
+    });
+
+    it('should return false when the scale is set to couple', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_COUPLE);
+      assert(!model.isSingleParentFamily());
+    });
+
+    it('should return true when the scale is set to single-parent-family', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Scale', Model.SCALE_SINGLE_PARENT_FAMILY);
+      assert(model.isSingleParentFamily());
+    });
+
+  });
+
   describe('.getPolicyHolderAge()', function() {
 
     it('should be 18 when the month has not passed', function() {
