@@ -152,6 +152,86 @@ describe('model', function() {
 
   });
 
+
+  describe('.getAGRPercentage()', function() {
+
+    it('should calculate AGR percentage based on policy holder and partner age', function() {
+      var model = new Model();
+      const incomeTier = 'Tier2';
+      model.getPolicyHolderAge = function() {
+        return 46;
+      };
+      model.getPartnerAge = function() {
+        return 47;
+      };
+
+      model.set('GovernmentDetails.IncomeTier', incomeTier);
+
+      model.AGR.getTier = function(tier) {
+        assert.equal(tier, 'Tier2');
+        return {
+          getPercentage: function(age1, age2) {
+            assert.equal(age1, 46);
+            assert.equal(age2, 47);
+            return 30;
+          }
+        };
+      };
+
+      assert.equal(model.getAGRPercentage(), 30);
+    });
+
+  });
+
+
+  describe('.getPartnerAge()', function() {
+
+    it('should be null when no partner', function() {
+      MockDate.set(moment('2014-04-01', 'YYYY-MM-DD'));
+
+      var model = new Model();
+      model.set('PersonalDetails.Partner', null);
+
+      assert.equal(model.getPartnerAge(), null);
+
+      MockDate.reset();
+    });
+
+    it('should be null when no partner date of birth', function() {
+      MockDate.set(moment('2014-04-01', 'YYYY-MM-DD'));
+
+      var model = new Model();
+      model.set('PersonalDetails.Partner.DateOfBirth', null);
+
+      assert.equal(model.getPartnerAge(), null);
+
+      MockDate.reset();
+    });
+
+    it('should be 18 when the month has not passed', function() {
+      MockDate.set(moment('2014-04-01', 'YYYY-MM-DD'));
+
+      var model = new Model();
+      model.set('PersonalDetails.Partner.DateOfBirth', '1995-09-01');
+
+      assert.equal(model.getPartnerAge(), 18);
+
+      MockDate.reset();
+    });
+
+    it('should be 19 when the month has passed', function() {
+      MockDate.set(moment('2014-11-01', 'YYYY-MM-DD'));
+
+      var model = new Model();
+      model.set('PersonalDetails.Partner.DateOfBirth', '1995-09-01');
+
+      assert.equal(model.getPartnerAge(), 19);
+
+      MockDate.reset();
+    });
+
+  });
+
   describe('.isLHCApplied()', function() {
 
     it('should be true', function() {

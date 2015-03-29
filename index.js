@@ -54,6 +54,7 @@ Model.PROPERTIES_THAT_COULD_AFFECT_PRICE = {
   'ContactDetails.Address':                                                         true,
   'ContactDetails.Address.State':                                                   true,
   'GovernmentDetails.PolicyHolderPreviousFundDetails.PreviouslyHadHealthInsurance': true,
+  'GovernmentDetails.PartnerPreviousFundDetails.PreviouslyHadHealthInsurance':      true,
   'GovernmentDetails.ApplyGovernmentRebate':                                        true,
   'GovernmentDetails.IncomeTier':                                                   true,
   'FinancialDetails.PaymentFrequency':                                              true
@@ -236,6 +237,19 @@ Model.prototype.defaultPolicyHolderGender = function() {
 };
 
 /**
+ * Get the partner's age
+ * @param   {String} [unit=years]
+ * @returns {Number}
+ */
+Model.prototype.getPartnerAge = function(unit) {
+  var partnerDateOfBirth = this.get('PersonalDetails.Partner.DateOfBirth');
+  if (partnerDateOfBirth) {
+    var dob = moment(partnerDateOfBirth, 'YYYY-MM-DD', true);
+    return Math.floor(moment().diff(dob, unit || 'years', true));
+  }
+};
+
+/**
  * Default the partner's gender from the title
  * @returns {Model}
  */
@@ -368,7 +382,7 @@ Model.prototype.isAGRApplied = function() {
  * @returns {Number}
  */
 Model.prototype.getAGRPercentage = function() {
-  return this.getAGRTier().getPercentage(this.getPolicyHolderAge());
+  return this.getAGRTier().getPercentage(this.getPolicyHolderAge(), this.getPartnerAge());
 };
 
 /**
