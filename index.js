@@ -218,11 +218,14 @@ Model.prototype.getPolicyHolderEmail = function() {
 /**
  * Get the policy holder's age
  * @param   {String} [unit=years]
- * @returns {Number}
+ * @returns {Number|null}
  */
 Model.prototype.getPolicyHolderAge = function(unit) {
-  var dob = moment(this.get('PersonalDetails.PolicyHolder.DateOfBirth'), 'YYYY-MM-DD', true);
-  return Math.floor(moment().diff(dob, unit || 'years', true));
+  var dateOfBirth = this.get('PersonalDetails.PolicyHolder.DateOfBirth');
+  if (dateOfBirth) {
+    var dob = moment(dateOfBirth, 'YYYY-MM-DD', true);
+    return Math.floor(moment().diff(dob, unit || 'years', true));
+  }
 };
 
 /**

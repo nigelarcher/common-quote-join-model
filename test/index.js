@@ -150,6 +150,14 @@ describe('model', function() {
       MockDate.reset();
     });
 
+    it('should be null when policy holder date of birth null', function() {
+      var model = new Model();
+      model.set('PersonalDetails.PolicyHolder.DateOfBirth', null);
+
+      console.log('getPolicyHolderAge', model.getPolicyHolderAge());
+      assert.equal(model.getPolicyHolderAge(), null, model.getPolicyHolderAge());
+    });
+
   });
 
 
@@ -228,6 +236,12 @@ describe('model', function() {
       assert.equal(model.getPartnerAge(), 19);
 
       MockDate.reset();
+    });
+
+    it('should be null when partner date of birth null', function() {
+      var model = new Model();
+      model.set('PersonalDetails.Partner.DateOfBirth', null);
+      assert.equal(model.getPartnerAge(), null);
     });
 
   });
