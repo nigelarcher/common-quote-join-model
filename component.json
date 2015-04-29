@@ -5,7 +5,7 @@
     "jkroso/equals": "0.3.6",
     "moment/moment": "~2.8.0",
     "nib-components/observable": "~1.0.2",
-    "nib-components/aus-gov-rebate": "~0.1.1"
+    "nib-components/aus-gov-rebate": "~0.1.2"
   },
   "development": {
     "dependencies": {
