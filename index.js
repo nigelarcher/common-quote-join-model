@@ -36,7 +36,6 @@ function Model(options) {
       self.emit('change:HospitalCode', value);
     })
     .on('change:ProductSelection.Extras', function(value) {
-      console.log('EXTRAS');
       self.emit('change:ExtrasCode', value);
     })
   ;
