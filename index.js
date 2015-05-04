@@ -122,7 +122,7 @@ Model.EXTRAS = [
 //copy the static constants to the prototype for accessibility
 for (var key in Model) {
   if (Model.hasOwnProperty(key)) {
-    if (key.indexOf('HOSPITAL') === 0 || key.indexOf('EXTRAS') === 0) {
+    if (key.indexOf('HOSPITAL') === 0 || key.indexOf('EXTRAS') === 0 || key.indexOf('SCALE') === 0) {
       Model.prototype[key] = Model[key];
     }
   }
