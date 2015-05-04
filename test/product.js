@@ -173,12 +173,12 @@ describe('Model: Product methods', function() {
       assert(model.isExtrasProductSelected());
     });
 
-    it('should return false', function () {
+    it('should return false where extras None', function () {
       model.setExtrasProductCode(Model.EXTRAS_NONE);
       assert(!model.isExtrasProductSelected());
     });
 
-    it('should return false', function () {
+    it('should return false when null extras', function () {
       model.set('ProductSelection.Extras', null);
       assert(!model.isExtrasProductSelected());
     });
