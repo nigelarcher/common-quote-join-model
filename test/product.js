@@ -178,6 +178,11 @@ describe('Model: Product methods', function() {
       assert(!model.isExtrasProductSelected());
     });
 
+    it('should return false', function () {
+      model.set('ProductSelection.Extras', null);
+      assert(!model.isExtrasProductSelected());
+    });
+
   });
 
 });

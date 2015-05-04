@@ -311,7 +311,7 @@ Model.prototype.setHospitalProductCode = function(code) {
  * @returns {Model}
  */
 Model.prototype.isExtrasProductSelected = function() {
-  return this.get('ProductSelection.Extras.Code') !== Model.EXTRAS_NONE;
+  return this.get('ProductSelection.Extras') && this.get('ProductSelection.Extras.Code') !== Model.EXTRAS_NONE;
 };
 
 /**
