@@ -1,0 +1,23 @@
+{
+  "name": "@nib-components/common-quote-join-model",
+  "version": "0.3.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nib-components/common-quote-join-model.git"
+  },
+  "dependencies": {
+    "equals": "0.3.6",
+    "moment": "~2.8.0",
+    "observable-component": "~1.0.2",
+    "@nib-components/aus-gov-rebate": "~0.1.2"
+  },
+  "devDependencies": {
+    "assert": "*",
+    "mockdate": "*"
+  },
+  "browser": {
+    "observable": "observable-component",
+    "aus-gov-rebate": "@nib-components/aus-gov-rebate"
+  }
+}
