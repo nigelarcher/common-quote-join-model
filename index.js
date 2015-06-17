@@ -36,7 +36,6 @@ function Model(options) {
       self.emit('change:HospitalCode', value);
     })
     .on('change:ProductSelection.Extras', function(value) {
-      console.log('EXTRAS');
       self.emit('change:ExtrasCode', value);
     })
   ;
@@ -123,7 +122,7 @@ Model.EXTRAS = [
 //copy the static constants to the prototype for accessibility
 for (var key in Model) {
   if (Model.hasOwnProperty(key)) {
-    if (key.indexOf('HOSPITAL') === 0 || key.indexOf('EXTRAS') === 0) {
+    if (key.indexOf('HOSPITAL') === 0 || key.indexOf('EXTRAS') === 0 || key.indexOf('SCALE') === 0) {
       Model.prototype[key] = Model[key];
     }
   }
@@ -250,11 +249,14 @@ Model.prototype.getPolicyHolderEmail = function() {
 /**
  * Get the policy holder's age
  * @param   {String} [unit=years]
- * @returns {Number}
+ * @returns {Number|null}
  */
 Model.prototype.getPolicyHolderAge = function(unit) {
-  var dob = moment(this.get('PersonalDetails.PolicyHolder.DateOfBirth'), 'YYYY-MM-DD', true);
-  return Math.floor(moment().diff(dob, unit || 'years', true));
+  var dateOfBirth = this.get('PersonalDetails.PolicyHolder.DateOfBirth');
+  if (dateOfBirth) {
+    var dob = moment(dateOfBirth, 'YYYY-MM-DD', true);
+    return Math.floor(moment().diff(dob, unit || 'years', true));
+  }
 };
 
 /**
@@ -341,7 +343,7 @@ Model.prototype.setHospitalProductCode = function(code) {
  * @returns {Model}
  */
 Model.prototype.isExtrasProductSelected = function() {
-  return this.get('ProductSelection.Extras.Code') !== Model.EXTRAS_NONE;
+  return this.get('ProductSelection.Extras') && this.get('ProductSelection.Extras.Code') !== Model.EXTRAS_NONE;
 };
 
 /**
