@@ -152,11 +152,43 @@ Model.getGenderFromTitle = function(value) {
 };
 
 /**
+ * Set the policy scale
+ * @returns {string}
+ */
+Model.prototype.setScale = function(scale) {
+
+  //check the code is valid
+  if (Model.SCALE.indexOf(scale) === -1) {
+    throw new Error('Invalid scale "'+scale+'".');
+  }
+
+  this.set('PersonalDetails.Scale', scale);
+  return this;
+};
+
+/**
  * Get the policy scale
  * @returns {string}
  */
 Model.prototype.getScale = function() {
   return this.get('PersonalDetails.Scale');
+};
+
+/**
+ * Set the policy state
+ * @returns {string}
+ */
+Model.prototype.setState = function(state) {
+  this.set('ContactDetails.Address.State', state);
+  return this;
+};
+
+/**
+ * Get the policy state
+ * @returns {string}
+ */
+Model.prototype.getState = function() {
+  return this.get('ContactDetails.Address.State');
 };
 
 /**
