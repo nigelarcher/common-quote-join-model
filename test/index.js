@@ -59,6 +59,19 @@ describe('model', function() {
       });
     });
 
+    it('should emit scale change event', function(done) {
+      var model = new Model();
+      var scale = Model.SCALE_FAMILY;
+      assert.notEqual(model.getScale(), scale);
+      model
+        .on('change:Scale', function(value) {
+          assert.equal(value, scale);
+          done();
+        })
+        .setScale(scale)
+      ;
+    });
+
   });
 
   describe('.getState()', function() {
@@ -84,6 +97,19 @@ describe('model', function() {
       assert.notEqual(model.getState(), state);
       model.setState(state);
       assert.equal(model.getState(), state);
+    });
+
+    it('should emit state change event', function(done) {
+      var model = new Model();
+      var state = 'TAS';
+      assert.notEqual(model.getState(), state);
+      model
+        .on('change:State', function(value) {
+          assert.equal(value, state);
+          done();
+        })
+        .setState(state)
+      ;
     });
 
   });
@@ -168,6 +194,46 @@ describe('model', function() {
       var model = new Model();
       model.set('PersonalDetails.Scale', Model.SCALE_SINGLE_PARENT_FAMILY);
       assert(model.isSingleParentFamily());
+    });
+
+  });
+
+  describe('.getState()', function() {
+
+    it('should return null when there is no scale is set', function() {
+      var model = new Model();
+      assert.equal(model.getState(), null);
+    });
+
+    it('should return NSW when the state is set to NSW', function() {
+      var model = new Model();
+      model.set('ContactDetails.Address.State', 'NSW');
+      assert.equal(model.getState(), 'NSW');
+    });
+
+  });
+
+  describe('.setExcess()', function() {
+
+    it('should return 250 when state is set', function() {
+      var model = new Model();
+      var excess = 250;
+      assert.notEqual(model.getExcess(), excess);
+      model.setExcess(excess);
+      assert.equal(model.getExcess(), excess);
+    });
+
+    it('should emit excess change event', function(done) {
+      var model = new Model();
+      var excess = 250;
+      assert.notEqual(model.getExcess(), excess);
+      model
+        .on('change:Excess', function(value) {
+          assert.equal(value, excess);
+          done();
+        })
+        .setExcess(excess)
+      ;
     });
 
   });

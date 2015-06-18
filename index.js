@@ -32,6 +32,15 @@ function Model(options) {
 
   //emit generic events to listen for data that may be mapped to multiple values
   this
+    .on('change:PersonalDetails.Scale', function(value) {
+      self.emit('change:Scale', value);
+    })
+    .on('change:ContactDetails.Address.State', function(value) {
+      self.emit('change:State', value);
+    })
+    .on('change:ProductSelection.Hospital.Excess', function(value) {
+      self.emit('change:Excess', value);
+    })
     .on('change:ProductSelection.Hospital.Code', function(value) {
       self.emit('change:HospitalCode', value);
     })
@@ -151,6 +160,14 @@ Model.getGenderFromTitle = function(value) {
 };
 
 /**
+ * Get the policy scale
+ * @returns {string}
+ */
+Model.prototype.getScale = function() {
+  return this.get('PersonalDetails.Scale');
+};
+
+/**
  * Set the policy scale
  * @returns {string}
  */
@@ -166,11 +183,11 @@ Model.prototype.setScale = function(scale) {
 };
 
 /**
- * Get the policy scale
+ * Get the policy state
  * @returns {string}
  */
-Model.prototype.getScale = function() {
-  return this.get('PersonalDetails.Scale');
+Model.prototype.getState = function() {
+  return this.get('ContactDetails.Address.State');
 };
 
 /**
@@ -180,14 +197,6 @@ Model.prototype.getScale = function() {
 Model.prototype.setState = function(state) {
   this.set('ContactDetails.Address.State', state);
   return this;
-};
-
-/**
- * Get the policy state
- * @returns {string}
- */
-Model.prototype.getState = function() {
-  return this.get('ContactDetails.Address.State');
 };
 
 /**
@@ -220,6 +229,23 @@ Model.prototype.isFamily = function() {
  */
 Model.prototype.isSingleParentFamily = function() {
   return this.getScale() === Model.SCALE_SINGLE_PARENT_FAMILY;
+};
+
+/**
+ * Get the policy excess
+ * @returns {string}
+ */
+Model.prototype.getExcess = function() {
+  return this.get('ProductSelection.Hospital.Excess');
+};
+
+/**
+ * Set the policy excess
+ * @returns {string}
+ */
+Model.prototype.setExcess = function(excess) {
+  this.set('ProductSelection.Hospital.Excess', excess);
+  return this;
 };
 
 /**
