@@ -114,6 +114,55 @@ describe('model', function() {
 
   });
 
+  describe('.getFrequency()', function() {
+
+    it('should get the correct value', function() {
+      var model = new Model();
+
+      assert.equal(null, model.getFrequency());
+      model.set('FinancialDetails.PaymentFrequency', Model.FREQUENCY_YEARLY);
+      assert.equal(Model.FREQUENCY_YEARLY, model.getFrequency());
+
+    });
+
+  });
+
+  describe('.setFrequency()', function() {
+
+    it('should set the mapped property for valid values', function() {
+      var model = new Model();
+
+      model.setFrequency(Model.FREQUENCY_FORTNIGHTLY);
+      assert.equal(Model.FREQUENCY_FORTNIGHTLY, model.get('FinancialDetails.PaymentFrequency'));
+
+      model.setFrequency(Model.FREQUENCY_MONTHLY);
+      assert.equal(Model.FREQUENCY_MONTHLY, model.get('FinancialDetails.PaymentFrequency'));
+
+      model.setFrequency(Model.FREQUENCY_QUARTERLY);
+      assert.equal(Model.FREQUENCY_QUARTERLY, model.get('FinancialDetails.PaymentFrequency'));
+
+      model.setFrequency(Model.FREQUENCY_WEEKLY);
+      assert.equal(Model.FREQUENCY_WEEKLY, model.get('FinancialDetails.PaymentFrequency'));
+
+      model.setFrequency(Model.FREQUENCY_YEARLY);
+      assert.equal(Model.FREQUENCY_YEARLY, model.get('FinancialDetails.PaymentFrequency'));
+
+      model.setFrequency(Model.FREQUENCY_HALFYEARLY);
+      assert.equal(Model.FREQUENCY_HALFYEARLY, model.get('FinancialDetails.PaymentFrequency'));
+
+    });
+
+    it('should throw an error', function() {
+      var model = new Model();
+
+      assert.throws(function() {
+        model.setFrequency('foobar');
+      }, Error, 'message');
+      assert.equal(null, model.get('FinancialDetails.PaymentFrequency'));
+    });
+
+  });
+
   describe('.isSingle()', function() {
 
     it('should return false when there is no scale is set', function() {

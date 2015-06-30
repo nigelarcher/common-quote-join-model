@@ -128,6 +128,24 @@ Model.EXTRAS = [
   Model.EXTRAS_WELLBEING
 ];
 
+/* === Frequency codes === */
+
+Model.FREQUENCY_FORTNIGHTLY     = 'Fortnightly';
+Model.FREQUENCY_HALFYEARLY      = 'HalfYearly';
+Model.FREQUENCY_MONTHLY         = 'Monthly';
+Model.FREQUENCY_QUARTERLY       = 'Quarterly';
+Model.FREQUENCY_WEEKLY          = 'Weekly';
+Model.FREQUENCY_YEARLY          = 'Yearly';
+
+Model.FREQUENCY = [
+  Model.FREQUENCY_FORTNIGHTLY,
+  Model.FREQUENCY_HALFYEARLY,
+  Model.FREQUENCY_MONTHLY,
+  Model.FREQUENCY_QUARTERLY,
+  Model.FREQUENCY_WEEKLY,
+  Model.FREQUENCY_YEARLY
+];
+
 //copy the static constants to the prototype for accessibility
 for (var key in Model) {
   if (Model.hasOwnProperty(key)) {
@@ -459,6 +477,31 @@ Model.prototype.isLHCApplied = function() {
  */
 Model.prototype.getLHCPercentage = function() {
   return this.LHC.Loading;
+};
+
+/**
+ * Get the payment frequency
+ * @returns {String}
+ */
+Model.prototype.getFrequency = function() {
+  return this.get('FinancialDetails.PaymentFrequency');
+};
+
+/**
+ * Set the payment frequency
+ * @param   {String} frequency
+ * @returns {Model}
+ */
+Model.prototype.setFrequency = function(frequency) {
+
+  //check the code is valid
+  if (Model.FREQUENCY.indexOf(frequency) === -1) {
+    throw new Error('Invalid payment frequency "'+frequency+'".');
+  }
+
+  //set the code
+  this.set('FinancialDetails.PaymentFrequency', frequency);
+  return this;
 };
 
 module.exports = Model;
