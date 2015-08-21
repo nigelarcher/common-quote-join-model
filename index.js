@@ -340,21 +340,10 @@ Model.prototype.defaultPartnerHolderGender = function() {
 
 /**
  * Get whether a hospital product is selected
- * @returns {Model}
+ * @returns   {boolean}
  */
 Model.prototype.isHospitalProductSelected = function() {
-  switch(this.getHospitalProductCode()) {
-
-    case Model.HOSPITAL_BASIC:
-    case Model.HOSPITAL_MID:
-    case Model.HOSPITAL_TOP:
-    case Model.HOSPITAL_TOP_WITH_PREGNANCY:
-      return true;
-
-    default:
-      return false;
-
-  }
+  return (this.getHospitalProductCode() && this.getHospitalProductCode() !== Model.HOSPITAL_NONE);
 };
 
 /**
