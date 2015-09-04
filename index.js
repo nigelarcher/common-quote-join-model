@@ -128,6 +128,18 @@ Model.EXTRAS = [
   Model.EXTRAS_WELLBEING
 ];
 
+/* === Combined codes === */
+
+Model.COMBINED_NONE               = 'None';
+Model.COMBINED_KICKSTARTER        = 'Kickstarter';
+Model.COMBINED_KICKSTARTERPLUS    = 'KickstarterPlus';
+
+Model.COMBINED = [
+  Model.COMBINED_NONE,
+  Model.COMBINED_KICKSTARTER,
+  Model.COMBINED_KICKSTARTERPLUS
+];
+
 /* === Frequency codes === */
 
 Model.FREQUENCY_FORTNIGHTLY     = 'Fortnightly';
@@ -426,6 +438,47 @@ Model.prototype.setExtrasProductCode = function(code) {
   //set the code
   this.set('ProductSelection.Extras', extras);
   return this;
+};
+
+/**
+ * Get whether a combined product is selected
+ * @returns   {boolean}
+ */
+Model.prototype.isCombinedProductSelected = function() {
+  return (this.getCombinedProductCode() && this.getCombinedProductCode() !== Model.COMBINED_NONE);
+};
+
+/**
+ * Get the selected combined product code
+ * @returns {String}
+ */
+Model.prototype.getCombinedProductCode = function() {
+  return this.get('ProductSelection.Combined.Code');
+};
+
+/**
+ * Set the selected combined product code
+ * @param   {String} code
+ * @returns {Model}
+ */
+Model.prototype.setCombinedProductCode = function(code) {
+
+  //check the code is valid
+  if (Model.COMBINED.indexOf(code) === -1) {
+    throw new Error('Invalid combined code "'+code+'".');
+  }
+
+  //set the code
+  this.set('ProductSelection.Combined.Code', code);
+  return this;
+};
+
+/**
+ * Get whether selected product has a hospital component
+ * @returns   {boolean}
+ */
+Model.prototype.hasHospitalComponent = function() {
+  return (this.isHospitalProductSelected() || this.isCombinedProductSelected());
 };
 
 /**

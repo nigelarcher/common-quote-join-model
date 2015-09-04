@@ -185,4 +185,48 @@ describe('Model: Product methods', function() {
 
   });
 
+  describe('.isCombinedProductSelected()', function() {
+
+    it('should return true', function () {
+      model.setCombinedProductCode(Model.COMBINED_KICKSTARTER);
+      assert(model.isCombinedProductSelected());
+    });
+
+    it('should return false where combined None', function () {
+      model.setExtrasProductCode(Model.COMBINED_NONE);
+      assert(!model.isCombinedProductSelected());
+    });
+
+    it('should return false when null combined', function () {
+      model.set('ProductSelection.Combined', null);
+      assert(!model.isCombinedProductSelected());
+    });
+
+  });
+
+  describe('.hasHospitalComponent()', function() {
+
+    it('should return true', function () {
+      model.setHospitalProductCode(Model.HOSPITAL_BASIC);
+      assert(model.hasHospitalComponent());
+    });
+
+    it('should return true where combined is true', function () {
+      model.setCombinedProductCode(Model.COMBINED_KICKSTARTER);
+      assert(model.hasHospitalComponent());
+    });
+
+    it('should return false where hospital None', function () {
+      model.setHospitalProductCode(Model.HOSPITAL_NONE);
+      assert(!model.hasHospitalComponent());
+    });
+
+    it('should return true where hospital None, but combined is true', function () {
+      model.setHospitalProductCode(Model.HOSPITAL_NONE);
+      model.setCombinedProductCode(Model.COMBINED_KICKSTARTER);
+      assert(model.hasHospitalComponent());
+    });
+
+  });
+
 });
