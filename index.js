@@ -262,7 +262,7 @@ Model.prototype.getExcess = function() {
  * @returns {string}
  */
 Model.prototype.setExcess = function(excess) {
-  this.set('ProductSelection.Hospital.Excess', excess);
+  this.set('ProductSelection.Hospital.Excess', Number(excess));
   return this;
 };
 

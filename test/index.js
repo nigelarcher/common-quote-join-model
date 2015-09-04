@@ -285,6 +285,13 @@ describe('model', function() {
       ;
     });
 
+    it('should return number when I pass in a string', function() {
+      var model = new Model();
+      model.setExcess('250');
+      assert.equal(typeof model.getExcess(), 'number');
+      assert.equal(model.getExcess(), 250);
+    });
+
   });
 
   describe('.getPolicyHolderAge()', function() {

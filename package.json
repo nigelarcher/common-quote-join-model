@@ -9,15 +9,15 @@
   "dependencies": {
     "equals": "0.3.6",
     "moment": "~2.8.0",
-    "observable-component": "~1.0.2",
-    "@nib-components/aus-gov-rebate": "~0.1.2"
+    "@nib-components/observable": "^1.0.2",
+    "@nib-components/aus-gov-rebate": "^0.1.2"
   },
   "devDependencies": {
     "assert": "*",
     "mockdate": "*"
   },
   "browser": {
-    "observable": "observable-component",
+    "observable": "@nib-components/observable",
     "aus-gov-rebate": "@nib-components/aus-gov-rebate"
   }
 }
