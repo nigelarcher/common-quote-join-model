@@ -372,12 +372,6 @@ Model.prototype.getHospitalProductCode = function() {
  * @returns {Model}
  */
 Model.prototype.setHospitalProductCode = function(code) {
-
-  //check the code is valid
-  if (Model.HOSPITAL.indexOf(code) === -1) {
-    throw new Error('Invalid hospital code "'+code+'".');
-  }
-
   //set the code
   this.set('ProductSelection.Hospital.Code', code);
   return this;
@@ -419,11 +413,6 @@ Model.prototype.getExtrasProductCode = function() {
 Model.prototype.setExtrasProductCode = function(code) {
   var extras;
 
-  //check the code is valid
-  if (Model.EXTRAS.indexOf(code) === -1) {
-    throw new Error('Invalid extras code "'+code+'".');
-  }
-
   //set the bundle structure
   if (code === Model.EXTRAS_NONE) {
     extras = {
@@ -462,12 +451,6 @@ Model.prototype.getCombinedProductCode = function() {
  * @returns {Model}
  */
 Model.prototype.setCombinedProductCode = function(code) {
-
-  //check the code is valid
-  if (Model.COMBINED.indexOf(code) === -1) {
-    throw new Error('Invalid combined code "'+code+'".');
-  }
-
   //set the code
   this.set('ProductSelection.Combined.Code', code);
   return this;
