@@ -50,31 +50,6 @@ describe('Model: Product methods', function() {
 
   describe('.setHospitalProductCode()', function() {
 
-    it('should set the mapped property for valid values', function() {
-
-      model.setHospitalProductCode(Model.HOSPITAL_NONE);
-      assert.equal(Model.HOSPITAL_NONE, model.get('ProductSelection.Hospital.Code'));
-
-      model.setHospitalProductCode(Model.HOSPITAL_BASIC);
-      assert.equal(Model.HOSPITAL_BASIC, model.get('ProductSelection.Hospital.Code'));
-
-      model.setHospitalProductCode(Model.HOSPITAL_MID);
-      assert.equal(Model.HOSPITAL_MID, model.get('ProductSelection.Hospital.Code'));
-
-      model.setHospitalProductCode(Model.HOSPITAL_TOP);
-      assert.equal(Model.HOSPITAL_TOP, model.get('ProductSelection.Hospital.Code'));
-
-      model.setHospitalProductCode(Model.HOSPITAL_TOP_WITH_PREGNANCY);
-      assert.equal(Model.HOSPITAL_TOP_WITH_PREGNANCY, model.get('ProductSelection.Hospital.Code'));
-
-    });
-
-    it('should throw an error', function() {
-      assert.throws(function() {
-        model.setHospitalProductCode('foobar');
-      }, Error, 'message');
-      assert.equal(null, model.get('ProductSelection.Hospital.Code'));
-    });
 
     it('should fire an event', function(done) {
       model
@@ -130,30 +105,6 @@ describe('Model: Product methods', function() {
   });
 
   describe('.setExtrasProductCode()', function() {
-
-    it('should set the mapped property for valid values', function() {
-
-      model.setExtrasProductCode(Model.EXTRAS_NONE);
-      assert.deepEqual({
-        "Code": "None",
-        "BaseBundle": null,
-        "Bundles": []
-      }, model.get('ProductSelection.Extras'));
-
-      model.setExtrasProductCode(Model.EXTRAS_CORE);
-      assert.deepEqual(preBundledExtrasProducts[Model.EXTRAS_CORE], model.get('ProductSelection.Extras'));
-
-      model.setExtrasProductCode(Model.EXTRAS_TOP);
-      assert.deepEqual(preBundledExtrasProducts[Model.EXTRAS_TOP], model.get('ProductSelection.Extras'));
-
-    });
-
-    it('should throw an error', function() {
-      assert.throws(function() {
-        model.setExtrasProductCode('foobar');
-      }, Error, 'message');
-      assert.equal(null, model.get('ProductSelection.Extras'));
-    });
 
     it('should fire an event', function(done) {
       model
