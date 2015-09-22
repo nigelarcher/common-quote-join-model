@@ -395,7 +395,6 @@ Model.prototype.getExtrasProductCode = function() {
 
   for (var key in this.preBundledExtrasProducts) {
     if (this.preBundledExtrasProducts.hasOwnProperty(key)) {
-      console.log('checking ',key)
       if (equals(extras, this.preBundledExtrasProducts[key])) {
         return key;
       }
