@@ -38,6 +38,9 @@ function Model(options) {
     .on('change:ContactDetails.Address.State', function(value) {
       self.emit('change:State', value);
     })
+    .on('change:FinancialDetails.PaymentFrequency', function(value) {
+      self.emit('change:PaymentFrequency', value);
+    })
     .on('change:ProductSelection.Hospital.Excess', function(value) {
       self.emit('change:Excess', value);
     })
@@ -226,6 +229,23 @@ Model.prototype.getState = function() {
  */
 Model.prototype.setState = function(state) {
   this.set('ContactDetails.Address.State', state);
+  return this;
+};
+
+/**
+ * Get the policy payment frequency
+ * @returns {string}
+ */
+Model.prototype.getPaymentFrequency = function() {
+  return this.get('FinancialDetails.PaymentFrequency');
+};
+
+/**
+ * Set the policy paymentFrequency
+ * @returns {string}
+ */
+Model.prototype.setPaymentFrequency = function(paymentFrequency) {
+  this.set('FinancialDetails.PaymentFrequency', paymentFrequency);
   return this;
 };
 
